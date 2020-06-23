@@ -53,7 +53,12 @@
         {
             "name":"u_slave2",
             "type":"slave"
+        },
+        {
+            "name":"u_my_new1",
+            "type":"slave"
         }
+
     ],
 
     "module_dict":[
