@@ -45,6 +45,14 @@
         {
             "name":"u_master",
             "type":"master"
+        },
+        {
+            "name":"u_slave",
+            "type":"slave"
+        },
+        {
+            "name":"u_slave2",
+            "type":"slave"
         }
     ],
 
@@ -53,22 +61,69 @@
             "name":"master",
             "port_list":[
                 {
-                    "name":"clk"
+                    "name":"CLK",
+                    "direction":"input",
+                    "width":1
                 },
                 {
-                    "name":"rstn"
+                    "name":"RESETn",
+                    "direction":"input",
+                    "width":1
+                },
+                {
+                    "name":"VALID",
+                    "direction":"output",
+                    "width":1
+                },
+                {
+                    "name":"READY",
+                    "direction":"input",
+                    "width":1
+                },
+                {
+                    "name":"O_DATA",
+                    "direction":"output",
+                    "width":32
+                },
+                {
+                    "name":"I_DATA",
+                    "direction":"input",
+                    "width":32
                 }
-
             ]
         },
         {
             "name":"slave",
             "port_list":[
                 {
-                    "name":"clk"
+                    "name":"CLK",
+                    "direction":"input",
+                    "width":1
                 },
                 {
-                    "name":"rstn"
+                    "name":"RESETn",
+                    "direction":"input",
+                    "width":1
+                },
+                {
+                    "name":"VALID",
+                    "direction":"input",
+                    "width":1
+                },
+                {
+                    "name":"READY",
+                    "direction":"output",
+                    "width":1
+                },
+                {
+                    "name":"O_DATA",
+                    "direction":"output",
+                    "width":32
+                },
+                {
+                    "name":"I_DATA",
+                    "direction":"input",
+                    "width":32
                 }
 
             ]
@@ -92,6 +147,36 @@
                 "width":0
             }
         },
+
+        {
+            "type":"port",
+            "mst":{
+                "inst_type":"master",
+                "inst_name":"u_master",
+                "port":"B",
+                "width":0
+            },
+            "slv":{
+                "inst_type":"slave",
+                "inst_name":"u_slave",
+                "port":"C0",
+                "width":0
+            }
+        },
+
+        {
+            "type":"same_port_full_connection",
+            "mst":{
+                "inst_type":"master",
+                "port":"A"
+            },
+            "slv":{
+                "inst_type":"slave",
+                "port":"A",
+                "width":0
+            }
+        },
+
 
         {
             "type":"protocol",
