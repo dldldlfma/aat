@@ -7,29 +7,25 @@
 
 code gen에서 표현이 필요한 경우의 수를 모두 정리해야 합니다. 
 
-1. connect
-    1. port
-        - port-to-port
-            - instance_port-to-instance_port
-        - top-to-port
-        - port-to-top
-        - concat
-        - replicate
-    2. tie (ground 혹은 vcc와 직접 연결 되는 선)
-        - port-to-GND
-        - port-to-VCC
-    4. Bus 
-        - various protocol
-
+현재 json file 구조
 
 ```json
 {
-    "type" : "connect",
-    "master" : {
-        
-    }
+    "top_name":"top",
+    "port_list":[
+    ],
+
+    "wire_list":[
+    ],
+
+    "instance_list":[
+    ],
+
+    "module_dict":[
+    ],
+    
+    "connection_list":[
+    ]
 }
 ```
 
-
-ksg!

@@ -27,31 +27,40 @@
             "width":"[31:0]",
             "prefix":"o_",
             "postfix":"_top"
+        },
+        {
+            "port_name":"o_valid",
+            "direction":"output",
+            "width":"",
+            "prefix":"o_",
+            "postfix":"_top"
         }
+
     ],
 
     "wire_list":[
         {
-            "name":"u_master_A",
+            "name":"external_valid",
             "width":0
         },
         {
             "name":"u_master_B",
             "width":"[31:0]"
+        },
+        {
+            "name":"example",
+            "width":0
         }
     ],
 
     "instance_list":[
+        
         {
             "name":"u_master",
             "type":"master"
         },
         {
             "name":"u_slave",
-            "type":"slave"
-        },
-        {
-            "name":"u_slave2",
             "type":"slave"
         }
     ],
@@ -133,54 +142,46 @@
     
     "connection_list":[
         {
-            "type":"port",
-            "mst":{
-                "inst_type":"master",
-                "inst_name":"u_master",
-                "port":"A",
-                "width":0
-            },
-            "slv":{
-                "inst_type":"slave",
-                "inst_name":"u_slave",
-                "port":"B0",
-                "width":0
-            }
-        },
-
+            "type":"wire",
+            "list":[
+                {
+                    "type":"instance",
+                    "from":["u_master","VALID"],
+                    "to":"external_valid"
+                },
+                {
+                    "type":"wire",
+                    "from":"some_port_this_is_example",
+                    "to":"example"
+                },
+                {
+                    "type":"instance",
+                    "from":["u_master","VALID"],
+                    "to":"o_valid"
+                }
+            ]
+        },     
+        
         {
-            "type":"port",
-            "mst":{
-                "inst_type":"master",
-                "inst_name":"u_master",
-                "port":"B",
-                "width":0
-            },
-            "slv":{
-                "inst_type":"slave",
-                "inst_name":"u_slave",
-                "port":"C0",
-                "width":0
-            }
-        },
-
-        {
-            "type":"same_port_full_connection",
-            "mst":{
-                "inst_type":"master",
-                "port":"A"
-            },
-            "slv":{
-                "inst_type":"slave",
-                "port":"A",
-                "width":0
-            }
-        },
-
-
-        {
-            "type":"protocol",
-            "inst_name":["u0_m","u1_s"]
+            "type":"instance",
+            "list":[
+                {
+                    "type":"instance",
+                    "from":["u_master","O_DATA"],
+                    "to":["u_slave","I_DATA"]
+                },
+                {
+                    "type":"wire",
+                    "from":"external_valid",
+                    "to":["u_slave","VALID"]
+                },
+                {
+                    "type":"top_port",
+                    "from": "CLK",
+                    "to":["u_master","CLK"]
+                }
+            ]
+            
         }
     ]
 }
